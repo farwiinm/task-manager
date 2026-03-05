@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Task Manager</title>
+        <link rel="stylesheet" href="style.css" />
+        <style></style>
+    </head>
+    <body>
+        <!-- AUTH SECTION — shown when not logged in -->
+        <div id="auth-section">
+            <h1>Task Manager</h1>
+
+            <!-- Login Form -->
+            <div id="login-form">
+                <h2>Login</h2>
+                <input type="email" id="login-email" placeholder="Email" />
+                <input
+                    type="password"
+                    id="login-password"
+                    placeholder="Password"
+                />
+                <button onclick="login()">Login</button>
+                <p>
+                    Don't have an account?
+                    <a href="#" onclick="showRegister()">Register</a>
+                </p>
+                <p id="login-error" style="color: red"></p>
+            </div>
+
+            <!-- Register Form -->
+            <div id="register-form" style="display: none">
+                <h2>Register</h2>
+                <input type="text" id="reg-name" placeholder="Name" />
+                <input type="email" id="reg-email" placeholder="Email" />
+                <input
+                    type="password"
+                    id="reg-password"
+                    placeholder="Password"
+                />
+                <input
+                    type="password"
+                    id="reg-confirm"
+                    placeholder="Confirm Password"
+                />
+                <button onclick="register()">Register</button>
+                <p>
+                    Already have an account?
+                    <a href="#" onclick="showLogin()">Login</a>
+                </p>
+                <p id="register-error" style="color: red"></p>
+            </div>
+        </div>
+
+        <!-- TASKS SECTION — shown when logged in -->
+        <div id="tasks-section" style="display: none">
+            <div id="header">
+                <h1>My Tasks</h1>
+                <button onclick="logout()">Logout</button>
+            </div>
+
+            <!-- Create Task Form -->
+            <div id="create-task">
+                <h2>Create New Task</h2>
+                <input type="text" id="task-title" placeholder="Task title" />
+                <textarea
+                    id="task-description"
+                    placeholder="Description (optional)"
+                ></textarea>
+                <select id="task-status">
+                    <option value="pending">Pending</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                </select>
+                <input type="date" id="task-due-date" />
+                <button onclick="createTask()">Add Task</button>
+                <p id="create-error" style="color: red"></p>
+            </div>
+
+            <!-- Filter -->
+            <div id="filter-bar">
+                <label>Filter by status:</label>
+                <select id="filter-status" onchange="loadTasks()">
+                    <option value="">All</option>
+                    <option value="pending">Pending</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                </select>
+                <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search by title..."
+                    oninput="loadTasks()"
+                />
+            </div>
+
+            <!-- Task List -->
+            <div id="task-list">
+                <!-- Tasks will be injected here by JavaScript -->
+            </div>
+
+            <!-- Pagination -->
+            <div id="pagination"></div>
+
+            <!-- Trashed Tasks Toggle -->
+            <button onclick="toggleTrashed()">View Deleted Tasks</button>
+            <div id="trashed-list" style="display: none"></div>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+</html>
